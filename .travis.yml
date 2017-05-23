@@ -1,0 +1,4 @@
+language: swift
+script:
+  - xctool -project PnutKit.xcodeproj -scheme PnutKit -sdk iphonesimulator clean build test
+
