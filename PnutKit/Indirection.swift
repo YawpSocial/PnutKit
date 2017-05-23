@@ -1,0 +1,46 @@
+//
+//  Indirection.swift
+//  PnutKit
+//
+//  Created by Paul Schifferer on 23/5/17.
+//  Copyright © 2017 Pilgrimage Software. All rights reserved.
+//
+
+import Foundation
+
+
+public struct Indirect<T> {
+
+    // Class wrapper to provide the actual indirection.
+    private final class Wrapper {
+
+        var value: T
+
+        init(_ value : T) {
+            self.value = value
+        }
+    }
+
+    private var wrapper: Wrapper
+
+    public init(_ value : T) {
+        wrapper = Wrapper(value)
+    }
+
+    public var value : T {
+        get {
+            return wrapper.value
+        }
+        set {
+            // upon mutation of value, if the wrapper class instance is unique,
+            // simply mutate the underlying value directly.
+            // otherwise, create a new instance.
+            if isKnownUniquelyReferenced(&wrapper) {
+                wrapper.value = newValue
+            }
+            else {
+                wrapper = Wrapper(newValue)
+            }
+        }
+    }
+}
