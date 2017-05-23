@@ -6,7 +6,7 @@
 //  Copyright © 2017 Pilgrimage Software. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for PnutKit.
 FOUNDATION_EXPORT double PnutKitVersionNumber;
