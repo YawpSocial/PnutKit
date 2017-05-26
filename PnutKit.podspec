@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 	s.name                    = "PnutKit"
-	s.version                 = "0.3.1"
+	s.version                 = "0.3.2"
 	s.summary                 = "A client library for the Pnut.io social network written in Swift"
 
 	s.homepage                = "https://pnut.io"
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
 	s.author                  = { "Paul Schifferer" => "paul@schifferers.net" }
 
     s.source                  = { :git => "https://github.com/exsortis/PnutKit.git", :tag => s.version.to_s, :submodules => true }
-	s.source_files            = 'PnutKit/**/*.{h,m,c,swift}'
+	s.source_files            = 'PnutKit/*.{h,m,c,swift}', 'PnutKit/**/*.{h,m,c,swift}'
 	s.frameworks              = 'Foundation'
 
 	s.ios.deployment_target   = '10.2'
