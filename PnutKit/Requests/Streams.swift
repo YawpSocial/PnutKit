@@ -1,8 +1,8 @@
 import Foundation
 
 
-public typealias StreamRequest = Request<[Post]>
-public typealias ExploreRequest = Request<[Explore]>
+public typealias StreamResource = Request<[Post]>
+public typealias ExploreResource = Request<[Explore]>
 
 public struct Streams {
 

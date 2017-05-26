@@ -1,6 +1,9 @@
 import Foundation
 
 
+public typealias ChannelResource = Request<Channel>
+public typealias MessagesResource = Request<[Message]>
+
 public struct Channels {
 
 //    public static func create() -> Request<Channel> {
