@@ -1,11 +1,3 @@
-//
-//  Source.swift
-//  Yawp
-//
-//  Created by Paul Schifferer on 19/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 
@@ -16,8 +8,9 @@ public struct Source {
 }
 
 
-extension Source {
-    public init?(from dict : [String : Any]) {
+extension Source : Serializable {
+    
+    public init?(from dict : JSONDictionary) {
         guard let name = dict["name"] as? String,
             let l = dict["link"] as? String,
             let link = URL(string: l),
@@ -29,12 +22,13 @@ extension Source {
         self.id = id
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        let dict : JSONDictionary = [
             "name" : name,
             "link" : link.absoluteString,
             "id" : id,
             ]
         return dict
     }
+
 }

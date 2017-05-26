@@ -1,11 +1,3 @@
-//
-//  Stream.swift
-//  Yawp
-//
-//  Created by Paul Schifferer on 19/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 
@@ -44,8 +36,9 @@ public enum StreamType : String {
 }
 
 
-extension Stream {
-    public init?(from dict : [String : Any]) {
+extension Stream : Serializable {
+
+    public init?(from dict : JSONDictionary) {
         guard let id = dict["id"] as? String,
             let objectTypes = dict["object_types"] as? [String],
             let t = dict["type"] as? String,
@@ -62,8 +55,8 @@ extension Stream {
         self.endpoint = endpoint
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        let dict : JSONDictionary = [
             "id" : id,
             "object_types" : objectTypes,
             "type" : type.rawValue,
@@ -72,4 +65,5 @@ extension Stream {
             ]
         return dict
     }
+    
 }

@@ -1,11 +1,3 @@
-//
-//  Token.swift
-//  Yawp
-//
-//  Created by Paul Schifferer on 19/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 
@@ -18,8 +10,9 @@ public struct Token {
 }
 
 
-extension Token {
-    public init?(from dict : [String : Any]) {
+extension Token : Serializable {
+    
+    public init?(from dict : JSONDictionary) {
         guard let app = dict["app"] as? [String : Any],
             let appId = app["id"] as? String,
             let link = app["link"] as? String,
@@ -36,8 +29,8 @@ extension Token {
         self.user = user
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        let dict : JSONDictionary = [
             "app" : [
                 "id" : appId,
                 "link" : appLink.absoluteString,
@@ -48,4 +41,5 @@ extension Token {
             ]
         return dict
     }
+
 }

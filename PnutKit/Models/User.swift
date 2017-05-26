@@ -1,11 +1,3 @@
-//
-//  User.swift
-//  Yawp
-//
-//  Created by Paul Schifferer on 19/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 
@@ -52,7 +44,7 @@ public enum UserType : String {
 }
 
 
-extension User {
+extension User : Serializable {
     static let deleted = User(createdAt: Date(),
                                   guid: "",
                                   id: "",
@@ -74,7 +66,8 @@ extension User {
 
 
 extension User {
-    public init?(from dict : [String : Any]) {
+
+    public init?(from dict : JSONDictionary) {
         guard let c = dict["created_at"] as? String,
             let createdAt = dateFormatter.date(from: c),
             let guid = dict["guid"] as? String,
@@ -134,8 +127,8 @@ extension User {
         }
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        var dict : JSONDictionary = [
             "created_at" : dateFormatter.string(from: createdAt),
             "guid" : guid,
             "id" : id,
@@ -160,7 +153,7 @@ extension User {
             ]
 
         if let name = name {
-            dict.setValue(name, forKey: "name")
+            dict["name"] = name
         }
 
         if let verified = verified {
@@ -174,9 +167,10 @@ extension User {
                 v.setValue(link.absoluteString, forKey: "link")
             }
             
-            dict.setValue(v, forKey: "verified")
+            dict["verified"] = v
         }
         
         return dict
     }
+    
 }

@@ -19,8 +19,9 @@ public struct Link {
 }
 
 
-extension Link {
-    public init?(from dict : [String : Any]) {
+extension Link : Serializable {
+
+    public init?(from dict : JSONDictionary) {
         guard let linkStr = dict["link"] as? String,
             let link = URL(string: linkStr),
             let text = dict["text"] as? String,
@@ -36,8 +37,8 @@ extension Link {
         self.desc = dict["description"] as? String
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        var dict : JSONDictionary = [
             "link" : link.absoluteString,
             "text" : text,
             "len" : len,
@@ -45,13 +46,14 @@ extension Link {
             ]
 
         if let title = title {
-            dict.setValue(title, forKey: "title")
+            dict["title"] = title
         }
 
         if let desc = desc {
-            dict.setValue(desc, forKey: "desc")
+            dict["desc"] = desc
         }
 
         return dict
     }
+
 }

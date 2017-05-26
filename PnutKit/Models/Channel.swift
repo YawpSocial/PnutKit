@@ -1,11 +1,3 @@
-//
-//  Channel.swift
-//  Yawp
-//
-//  Created by Paul Schifferer on 19/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 
@@ -32,8 +24,9 @@ public struct Channel {
 }
 
 
-extension Channel {
-    public init?(from dict : [String : Any]) {
+extension Channel : Serializable {
+    
+    public init?(from dict : JSONDictionary) {
         guard let createdAtStr = dict["created_at"] as? String,
             let createdAt = dateFormatter.date(from: createdAtStr),
             let id = dict["id"] as? String,
@@ -63,8 +56,8 @@ extension Channel {
         self.hasUnread = hasUnread
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        var dict : JSONDictionary = [
             "created_at" : dateFormatter.string(from: createdAt),
             "id" : id,
             "is_active" : isActive,
@@ -81,12 +74,13 @@ extension Channel {
             ]
 
         if let recentMessageId = recentMessageId {
-            dict.setValue(recentMessageId, forKey: "recent_message_id")
+            dict["recent_message_id"] = recentMessageId
         }
         if let recentMessage = recentMessage {
-            dict.setValue(recentMessage.toDictionary(), forKey: "recent_message")
+            dict["recent_message"] = recentMessage.toDictionary()
         }
 
         return dict
     }
+    
 }

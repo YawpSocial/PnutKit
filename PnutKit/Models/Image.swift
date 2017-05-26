@@ -17,8 +17,9 @@ public struct Image {
 }
 
 
-extension Image {
-    public init?(from dict : [String : Any]) {
+extension Image : Serializable {
+
+    public init?(from dict : JSONDictionary) {
         guard let l = dict["link"] as? String,
             let link = URL(string: l),
             let width = dict["width"] as? Int,
@@ -31,12 +32,13 @@ extension Image {
         self.height = height
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        let dict : JSONDictionary = [
             "link" : link.absoluteString,
             "width" : width,
             "height" : height,
             ]
         return dict
     }
+    
 }

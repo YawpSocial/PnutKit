@@ -1,11 +1,3 @@
-//
-//  Indirection.swift
-//  PnutKit
-//
-//  Created by Paul Schifferer on 23/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 

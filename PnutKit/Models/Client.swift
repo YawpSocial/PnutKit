@@ -1,11 +1,3 @@
-//
-//  Client.swift
-//  Yawp
-//
-//  Created by Paul Schifferer on 19/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 
@@ -22,8 +14,9 @@ public struct Client {
 }
 
 
-extension Client {
-    public init?(from dict : [String : Any]) {
+extension Client : Serializable {
+
+    public init?(from dict : JSONDictionary) {
         guard let createdAtStr = dict["created_at"] as? String,
             let createdAt = dateFormatter.date(from: createdAtStr),
             let createdBy = User(from: dict["created_by"] as? [String : Any] ?? [:]),
@@ -43,8 +36,8 @@ extension Client {
         self.content = []
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        let dict : JSONDictionary = [
             "created_at" : dateFormatter.string(from: createdAt),
             "created_by" : createdBy.toDictionary(),
             "id" : id,
@@ -55,4 +48,5 @@ extension Client {
             ]
         return dict
     }
+    
 }

@@ -8,14 +8,12 @@ Pod::Spec.new do |s|
 	s.author                  = { "Paul Schifferer" => "paul@schifferers.net" }
 
     s.source                  = { :git => "https://github.com/exsortis/PnutKit.git", :tag => s.version.to_s, :submodules => true }
-	s.source_files            = 'PnutKit/*.{h,m,c,swift}'
+	s.source_files            = 'PnutKit/**/*.{h,m,c,swift}'
 	s.frameworks              = 'Foundation'
 
 	s.ios.deployment_target   = '10.2'
 	#s.osx.deployment_target   = '10.12'
 
 	s.requires_arc            = true
-
-	s.dependency              'Alamofire'
 
 end

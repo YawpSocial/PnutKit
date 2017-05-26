@@ -19,8 +19,9 @@ public struct Mention {
 }
 
 
-extension Mention {
-    public init?(from dict : [String : Any]) {
+extension Mention : Serializable {
+    
+    public init?(from dict : JSONDictionary) {
         guard let id = dict["id"] as? String,
             let len = dict["len"] as? Int,
             let pos = dict["pos"] as? Int,
@@ -35,8 +36,8 @@ extension Mention {
         self.isCopy = dict["is_copy"] as? Bool ?? false
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        let dict : JSONDictionary = [
             "id" : id,
             "len" : len,
             "pos" : pos,
@@ -46,4 +47,5 @@ extension Mention {
             ]
         return dict
     }
+
 }

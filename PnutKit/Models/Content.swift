@@ -26,8 +26,9 @@ public struct Content {
 }
 
 
-extension Content {
-    public init?(from dict : [String : Any]) {
+extension Content : Serializable {
+
+    public init?(from dict : JSONDictionary) {
         guard let text = dict["text"] as? String,
             let html = dict["html"] as? String
             else { return nil }
@@ -57,8 +58,8 @@ extension Content {
         self.linksNotParsed = dict["links_not_parsed"] as? Bool
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        var dict : JSONDictionary = [
             "text" : text,
             "html" : html,
             "entities" : [
@@ -69,16 +70,17 @@ extension Content {
         ]
 
         if let image = avatarImage {
-            dict.setValue(image.toDictionary(), forKey: "avatar_image")
+            dict["avatar_image"] = image.toDictionary()
         }
         if let image = coverImage {
-            dict.setValue(image.toDictionary(), forKey: "cover_image")
+            dict["cover_image"] = image.toDictionary()
         }
 
         if let linksNotParsed = linksNotParsed {
-            dict.setValue(linksNotParsed, forKey: "links_not_parsed")
+            dict["links_not_parsed"] = linksNotParsed
         }
         
         return dict
     }
+    
 }

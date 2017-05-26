@@ -1,11 +1,3 @@
-//
-//  Stats.swift
-//  Yawp
-//
-//  Created by Paul Schifferer on 19/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 
@@ -20,8 +12,9 @@ public struct Stats {
 }
 
 
-extension Stats {
-    public init?(from dict : [String : Any]) {
+extension Stats : Serializable {
+
+    public init?(from dict : JSONDictionary) {
         guard let counts = dict["counts"] as? [String : Any],
             let clients = counts["clients"] as? [String : Any],
             let clientsCreated = clients["created"] as? Int,
@@ -45,8 +38,8 @@ extension Stats {
         self.usersPresent = usersPresent
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        let dict : JSONDictionary = [
             "counts" : [
                 "clients" : [
                     "created" : clientsCreated,
@@ -67,4 +60,5 @@ extension Stats {
         ]
         return dict
     }
+
 }

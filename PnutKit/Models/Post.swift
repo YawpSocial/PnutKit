@@ -1,11 +1,3 @@
-//
-//  Post.swift
-//  Yawp
-//
-//  Created by Paul Schifferer on 19/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 
@@ -36,9 +28,10 @@ public struct Post {
 }
 
 
-extension Post {
-    public init?(from dict : [String : Any]) {
-        guard let c = dict["create_at"] as? String,
+extension Post : Serializable {
+
+    public init?(from dict : JSONDictionary) {
+        guard let c = dict["created_at"] as? String,
             let createdAt = dateFormatter.date(from: c),
             let guid = dict["guid"] as? String,
             let id = dict["id"] as? String,
@@ -77,8 +70,8 @@ extension Post {
         }
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        var dict : JSONDictionary = [
             "created_at" : dateFormatter.string(from: createdAt),
             "guid" : guid,
             "id" : id,
@@ -94,29 +87,30 @@ extension Post {
             ]
 
         if let user = user {
-            dict.setValue(user.toDictionary(), forKey: "user")
+            dict["user"] = user.toDictionary()
         }
 
         if let replyTo = replyTo {
-            dict.setValue(replyTo, forKey: "reply_to")
+            dict["reply_to"] = replyTo
         }
 
         if let repostOf = repostOf {
-            dict.setValue(repostOf.value.toDictionary(), forKey: "repost_of")
+            dict["repost_of"] = repostOf.value.toDictionary()
         }
 
         if let content = content {
-            dict.setValue(content.toDictionary(), forKey: "content")
+            dict["content"] = content.toDictionary()
         }
 
         if let youBookmarked = youBookmarked {
-            dict.setValue(youBookmarked, forKey: "you_bookmarked")
+            dict["you_bookmarked"] = youBookmarked
         }
 
         if let youReposted = youReposted {
-            dict.setValue(youReposted, forKey: "you_reposted")
+            dict["you_reposted"] = youReposted
         }
         
         return dict
     }
+
 }

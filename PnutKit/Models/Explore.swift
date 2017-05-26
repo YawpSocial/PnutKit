@@ -17,8 +17,9 @@ public struct Explore {
 }
 
 
-extension Explore {
-    public init?(from dict : [String : Any]) {
+extension Explore : Serializable {
+    
+    public init?(from dict : JSONDictionary) {
         guard let desc = dict["description"] as? String,
             let l = dict["link"] as? String,
             let link = URL(string: l),
@@ -32,8 +33,8 @@ extension Explore {
         self.title = title
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        let dict : JSONDictionary = [
             "description" : desc,
             "link" : link.absoluteString,
             "slug" : slug,
@@ -41,4 +42,5 @@ extension Explore {
             ]
         return dict
     }
+    
 }

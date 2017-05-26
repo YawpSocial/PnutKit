@@ -1,11 +1,3 @@
-//
-//  ACL.swift
-//  Yawp
-//
-//  Created by Paul Schifferer on 19/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 
@@ -35,8 +27,9 @@ public struct ACL {
 }
 
 
-extension ACL {
-    public init?(from dict : [String : Any]) {
+extension ACL : Serializable {
+
+    public init?(from dict : JSONDictionary) {
         guard let full = dict["full"] as? [String : Any],
             let write = dict["write"] as? [String : Any],
             let read = dict["read"] as? [String : Any],
@@ -70,8 +63,8 @@ extension ACL {
         self.read.userIds = readUserIds
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        let dict : JSONDictionary = [
             "full" : [
                 "immutable" : full.immutable,
                 "you" : full.you,
@@ -93,4 +86,5 @@ extension ACL {
         ]
         return dict
     }
+    
 }

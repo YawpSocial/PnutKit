@@ -51,8 +51,9 @@ public struct Configuration {
 }
 
 
-extension Configuration {
-    public init?(from dict : [String : Any]) {
+extension Configuration : Serializable {
+
+    public init?(from dict : JSONDictionary) {
         if let message = dict["message"] as? [String : Any] {
             if let value = message["max_length"] as? Int {
                 self.message.maxLength = value
@@ -109,8 +110,8 @@ extension Configuration {
         }
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        let dict : JSONDictionary = [
             "message" : [
                 "max_length" : message.maxLength,
             ],
@@ -139,4 +140,5 @@ extension Configuration {
         ]
         return dict
     }
+    
 }

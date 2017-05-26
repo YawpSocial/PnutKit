@@ -1,11 +1,3 @@
-//
-//  Raw.swift
-//  Yawp
-//
-//  Created by Paul Schifferer on 19/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 
@@ -20,8 +12,9 @@ public struct Raw {
 }
 
 
-extension Raw {
-    public init?(from dict : [String : Any]) {
+extension Raw : Serializable {
+
+    public init?(from dict : JSONDictionary) {
         guard let type = dict["type"] as? String,
             let value = dict["value"] as? [String : Any]
             else { return nil }
@@ -30,11 +23,12 @@ extension Raw {
         self.value = value
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        let dict : JSONDictionary = [
             "type" : type,
             "value" : value,
             ]
         return dict
     }
+    
 }

@@ -1,11 +1,3 @@
-//
-//  Message.swift
-//  Yawp
-//
-//  Created by Paul Schifferer on 19/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 
@@ -25,8 +17,9 @@ public struct Message {
 }
 
 
-extension Message {
-    public init?(from dict : [String : Any]) {
+extension Message : Serializable {
+
+    public init?(from dict : JSONDictionary) {
         guard let c = dict["created_at"] as? String,
             let createdAt = dateFormatter.date(from: c),
             let id = dict["id"] as? String,
@@ -56,8 +49,8 @@ extension Message {
         }
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        var dict : JSONDictionary = [
             "created_at" : dateFormatter.string(from: createdAt),
             "id" : id,
             "is_deleted" : isDeleted,
@@ -68,13 +61,14 @@ extension Message {
             ]
 
         if let content = content {
-            dict.setValue(content.toDictionary(), forKey: "content")
+            dict["content"] = content.toDictionary()
         }
 
         if let replyTo = replyTo {
-            dict.setValue(replyTo, forKey: "reply_to")
+            dict["reply_to"] = replyTo
         }
 
         return dict
     }
+
 }

@@ -1,11 +1,3 @@
-//
-//  Tag.swift
-//  Yawp
-//
-//  Created by Paul Schifferer on 19/5/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
-//
-
 import Foundation
 
 
@@ -16,8 +8,9 @@ public struct Tag {
 }
 
 
-extension Tag {
-    public init?(from dict : [String : Any]) {
+extension Tag : Serializable {
+    
+    public init?(from dict : JSONDictionary) {
         guard let len = dict["len"] as? Int,
             let pos = dict["pos"] as? Int,
             let text = dict["text"] as? String
@@ -28,12 +21,13 @@ extension Tag {
         self.text = text
     }
 
-    public func toDictionary() -> NSDictionary {
-        let dict : NSDictionary = [
+    public func toDictionary() -> JSONDictionary {
+        let dict : JSONDictionary = [
             "len" : len,
             "pos" : pos,
             "text" : text,
             ]
         return dict
     }
+
 }
