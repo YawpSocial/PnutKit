@@ -26,6 +26,11 @@ public struct Authentication {
         return Request<LoginResponse>(path: "/oauth/access_token", method: method, parse: Request<LoginResponse>.parser)
     }
 
+    public static func token() -> Request<Token> {
+        let method = HTTPMethod.get(Payload.empty)
+        return Request<Token>(path: "/token", method: method, parse: Request<Token>.parser)
+    }
+
     public static func logout() -> Request<Token> {
         let method = HTTPMethod.delete
         return Request<Token>(path: "/token", method: method, parse: Request<Token>.parser)
