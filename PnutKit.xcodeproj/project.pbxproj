@@ -38,7 +38,7 @@
 		5B73861D1ED78ED200F9E6CC /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7385F91ED78ED200F9E6CC /* Request.swift */; };
 		5B73861E1ED78ED200F9E6CC /* RequestParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7385FA1ED78ED200F9E6CC /* RequestParsers.swift */; };
 		5B73861F1ED78ED200F9E6CC /* RequestRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7385FB1ED78ED200F9E6CC /* RequestRange.swift */; };
-		5B7386201ED78ED200F9E6CC /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7385FD1ED78ED200F9E6CC /* Login.swift */; };
+		5B7386201ED78ED200F9E6CC /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7385FD1ED78ED200F9E6CC /* Authentication.swift */; };
 		5B7386211ED78ED200F9E6CC /* Streams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7385FE1ED78ED200F9E6CC /* Streams.swift */; };
 		5B7386231ED78F5300F9E6CC /* Indirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7386221ED78F5300F9E6CC /* Indirection.swift */; };
 		5B7386251ED78F7F00F9E6CC /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7386241ED78F7F00F9E6CC /* Serializable.swift */; };
@@ -92,7 +92,7 @@
 		5B7385F91ED78ED200F9E6CC /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		5B7385FA1ED78ED200F9E6CC /* RequestParsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestParsers.swift; sourceTree = "<group>"; };
 		5B7385FB1ED78ED200F9E6CC /* RequestRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestRange.swift; sourceTree = "<group>"; };
-		5B7385FD1ED78ED200F9E6CC /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		5B7385FD1ED78ED200F9E6CC /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		5B7385FE1ED78ED200F9E6CC /* Streams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Streams.swift; sourceTree = "<group>"; };
 		5B7386221ED78F5300F9E6CC /* Indirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Indirection.swift; sourceTree = "<group>"; };
 		5B7386241ED78F7F00F9E6CC /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 		5B7385FC1ED78ED200F9E6CC /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				5B7385FD1ED78ED200F9E6CC /* Login.swift */,
+				5B7385FD1ED78ED200F9E6CC /* Authentication.swift */,
 				5B7385FE1ED78ED200F9E6CC /* Streams.swift */,
 				5B73862A1ED7974800F9E6CC /* Posts.swift */,
 			);
@@ -350,7 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B7385FF1ED78ED200F9E6CC /* APIClient.swift in Sources */,
-				5B7386201ED78ED200F9E6CC /* Login.swift in Sources */,
+				5B7386201ED78ED200F9E6CC /* Authentication.swift in Sources */,
 				5B73860A1ED78ED200F9E6CC /* Channel.swift in Sources */,
 				5B7386141ED78ED200F9E6CC /* Raw.swift in Sources */,
 				5B7386231ED78F5300F9E6CC /* Indirection.swift in Sources */,
