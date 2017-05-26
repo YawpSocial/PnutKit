@@ -3,15 +3,16 @@ import Foundation
 
 public struct Authentication {
 
-    /// Performs a silent login.
-    ///
-    /// - Parameters:
-    ///   - clientID: The client ID.
-    ///   - clientSecret: The client secret.
-    ///   - scopes: The access scopes.
-    ///   - username: The user's username or e-mail address.
-    ///   - password: The user's password.
-    /// - Returns: Request for `LoginSettings`.
+    /**
+     Logs the user in using the password grant method.
+
+        - parameter clientID: The client ID.
+        - parameter grantSecret: The password grant secret.
+        - parameter scopes: The access scopes.
+        - parameter username: The user's username.
+        - parameter password: The user's password.
+      - returns: Request for `LoginResponse`.
+     */
     public static func login(clientID: String, grantSecret: String, scopes: [AccessScope], username: String, password: String) -> Request<LoginResponse> {
         let parameters = [
             Parameter(name: "client_id", value: clientID),
@@ -26,14 +27,20 @@ public struct Authentication {
         return Request<LoginResponse>(path: "/oauth/access_token", method: method, parse: Request<LoginResponse>.parser)
     }
 
+    /**
+     Returns the token object associated with the access token provided.
+     */
     public static func token() -> Request<Token> {
         let method = HTTPMethod.get(Payload.empty)
         return Request<Token>(path: "/token", method: method, parse: Request<Token>.parser)
     }
 
+    /**
+     Logs the user out.
+     */
     public static func logout() -> Request<Token> {
         let method = HTTPMethod.delete
         return Request<Token>(path: "/token", method: method, parse: Request<Token>.parser)
     }
-
+    
 }

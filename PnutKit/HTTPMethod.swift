@@ -5,6 +5,7 @@ enum HTTPMethod {
     case get(Payload)
     case post(Payload)
     case patch(Payload)
+    case put(Payload)
     case delete
 }
 
@@ -13,6 +14,7 @@ extension HTTPMethod {
         switch self {
         case .get: return "GET"
         case .post: return "POST"
+        case .put: return "PUT"
         case .delete: return "DELETE"
         case .patch: return "PATCH"
         }
@@ -28,6 +30,7 @@ extension HTTPMethod {
     var httpBody: Data? {
         switch self {
         case .post(let payload): return payload.data
+        case .put(let payload): return payload.data
         case .patch(let payload): return payload.data
         default: return nil
         }
@@ -36,6 +39,7 @@ extension HTTPMethod {
     var contentType: String? {
         switch self {
         case .post(let payload): return payload.type
+        case .put(let payload): return payload.type
         case .patch(let payload): return payload.type
         default: return nil
         }
