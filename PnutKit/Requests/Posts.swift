@@ -28,6 +28,16 @@ public struct Posts {
         return Request<Post>(path: "/posts", method: method, parse: Request<Post>.parser)
     }
 
+    public static func get(postId : String, raw : Bool? = nil) -> Request<Post> {
+        let parameters = [
+            Parameter(name: "include_raw", value: raw.flatMap(trueOrNil)),
+            Parameter(name: "include_user_raw", value: raw.flatMap(trueOrNil)),
+        ]
+        let method = HTTPMethod.get(Payload.parameters(parameters))
+
+        return Request<Post>(path: "/posts/\(postId)", method: method, parse: Request<Post>.parser)
+    }
+
 //    public static func edit(postId : String) -> Request<Post> {
 //
 //    }
