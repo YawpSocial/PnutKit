@@ -7,5 +7,7 @@ public enum ClientError : Error {
     /// The service returned an error.
     case serviceError(String)
     /// Failed to parse the response from Pnut.io.
-    case dataError
+    case dataError(Data?)
+    /// The server response was invalid
+    case invalidResponse(URLResponse?)
 }

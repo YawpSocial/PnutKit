@@ -28,26 +28,33 @@ public final class APIClient {
                 return
             }
 
-            guard
-                let data = data,
-                let jsonObject = try? JSONSerialization.jsonObject(with: data, options: [])
-                else {
-                    completion(nil, ClientError.dataError)
-                    return
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(nil, ClientError.invalidResponse(response))
+                return
             }
 
-            guard
-                let httpResponse = response as? HTTPURLResponse,
-                200...299 ~= httpResponse.statusCode
-                else {
-                    let serviceError = PnutError(json: jsonObject)
+            guard 200...299 ~= httpResponse.statusCode else {
+                if let data = data,
+                    let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) {
+                    let serviceError = ServiceError(json: jsonObject)
                     completion(nil, ClientError.serviceError(serviceError.description))
+                }
+                else {
+                    completion(nil, ClientError.dataError(data))
+                }
+                return
+            }
+
+            guard let d = data,
+                let jsonObject = try? JSONSerialization.jsonObject(with: d, options: [])
+                else {
+                    completion(nil, ClientError.dataError(data))
                     return
             }
 
             completion(request.parse(jsonObject), nil)
         }
-
+        
         task.resume()
     }
 }

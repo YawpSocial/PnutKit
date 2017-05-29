@@ -1,12 +1,12 @@
 import Foundation
 
 
-struct PnutError {
+struct ServiceError {
     /// Reason why Pnut.io returned an error.
     let description : String
 }
 
-extension PnutError {
+extension ServiceError {
 
     init(json : JSONObject) {
         let dictionary = json as? JSONDictionary
