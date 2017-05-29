@@ -7,6 +7,7 @@ Pod::Spec.new do |s|
 	s.homepage                = "https://pnut.io"
 	s.license                 = { :type => 'MIT', :file => 'LICENSE' }
 	s.author                  = { "Paul Schifferer" => "paul@schifferers.net" }
+        s.social_media_url        = "https://twitter.com/paulyhedral"
 
 	s.source                  = { :git => "https://github.com/exsortis/PnutKit.git", :tag => s.version.to_s, :submodules => true }
 	s.source_files            = 'PnutKit/*.{h,m,c,swift}', 'PnutKit/**/*.{h,m,c,swift}'
