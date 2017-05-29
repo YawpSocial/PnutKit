@@ -38,7 +38,7 @@ public final class APIClient {
 
             guard
                 let httpResponse = response as? HTTPURLResponse,
-                httpResponse.statusCode == 200
+                200...299 ~= httpResponse.statusCode
                 else {
                     let serviceError = PnutError(json: jsonObject)
                     completion(nil, ClientError.serviceError(serviceError.description))
