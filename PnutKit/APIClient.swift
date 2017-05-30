@@ -12,8 +12,7 @@ public final class APIClient {
     }
 
     public func run<Model>(_ request : Request<Model>, completion : @escaping (Model?, Error?) -> Void) {
-        guard
-            let components = URLComponents(baseURL: baseURL, request: request),
+        guard let components = URLComponents(baseURL: baseURL, request: request),
             let requestURL = components.url
             else {
                 completion(nil, ClientError.malformedURL)
