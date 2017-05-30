@@ -46,22 +46,22 @@ public enum UserType : String {
 
 extension User : Serializable {
     static let deleted = User(createdAt: Date(),
-                                  guid: "",
-                                  id: "",
-                                  locale: "",
-                                  timezone: "",
-                                  type: .human,
-                                  username: "",
-                                  name: nil,
-                                  content: Content(text: "", html: "<p/>"),
-                                  counts: Counts(bookmarks: 0, clients: 0, followers: 0, following: 0, posts: 0, users: 0),
-                                  followsYou: false,
-                                  youBlocked: false,
-                                  youFollow: false,
-                                  youMuted: false,
-                                  youCanFollow: false,
-                                  verified: nil,
-                                  raw: [])
+                              guid: "",
+                              id: "",
+                              locale: "",
+                              timezone: "",
+                              type: .human,
+                              username: "",
+                              name: nil,
+                              content: Content(text: "", html: "<p/>"),
+                              counts: Counts(bookmarks: 0, clients: 0, followers: 0, following: 0, posts: 0, users: 0),
+                              followsYou: false,
+                              youBlocked: false,
+                              youFollow: false,
+                              youMuted: false,
+                              youCanFollow: false,
+                              verified: nil,
+                              raw: [])
 }
 
 
@@ -79,18 +79,7 @@ extension User {
             let username = dict["username"] as? String,
             let co = dict["content"] as? [String : Any],
             let content = Content(from: co),
-            let counts = dict["counts"] as? [String : Any],
-            let bookmarksCount = counts["bookmarks"] as? Int,
-            let clientsCount = counts["clients"] as? Int,
-            let followersCount = counts["followers"] as? Int,
-            let followingCount = counts["following"] as? Int,
-            let postsCount = counts["posts"] as? Int,
-            let usersCount = counts["users"] as? Int,
-            let followsYou = dict["follows_you"] as? Bool,
-            let youBlocked = dict["you_blocked"] as? Bool,
-            let youFollow = dict["you_follow"] as? Bool,
-            let youMuted = dict["you_muted"] as? Bool,
-            let youCanFollow = dict["you_can_follow"] as? Bool
+            let counts = dict["counts"] as? [String : Any]
             else { return nil }
 
         self.createdAt = createdAt
@@ -102,17 +91,17 @@ extension User {
         self.username = username
         self.name = dict["name"] as? String
         self.content = content
-        self.counts = Counts(bookmarks: bookmarksCount,
-                             clients: clientsCount,
-                             followers: followersCount,
-                             following: followingCount,
-                             posts: postsCount,
-                             users: usersCount)
-        self.followsYou = followsYou
-        self.youBlocked = youBlocked
-        self.youFollow = youFollow
-        self.youMuted = youMuted
-        self.youCanFollow = youCanFollow
+        self.counts = Counts(bookmarks: counts["bookmarks"] as? Int ?? 0,
+                             clients: counts["clients"] as? Int ?? 0,
+                             followers: counts["followers"] as? Int ?? 0,
+                             following: counts["following"] as? Int ?? 0,
+                             posts: counts["posts"] as? Int ?? 0,
+                             users: counts["users"] as? Int ?? 0)
+        self.followsYou = dict["follows_you"] as? Bool ?? false
+        self.youBlocked = dict["you_blocked"] as? Bool ?? false
+        self.youFollow = dict["you_follow"] as? Bool ?? false
+        self.youMuted = dict["you_muted"] as? Bool ?? false
+        self.youCanFollow = dict["you_can_follow"] as? Bool ?? true
 
         if let verified = dict["verified"] as? [String : Any] {
             self.verified = Verified(domain: verified["domain"] as? String,
@@ -166,10 +155,10 @@ extension User {
             if let link = verified.link {
                 v.setValue(link.absoluteString, forKey: "link")
             }
-            
+
             dict["verified"] = v
         }
-        
+
         return dict
     }
     
