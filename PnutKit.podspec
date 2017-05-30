@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 	s.name                    = "PnutKit"
-	s.version                 = "0.3.6"
+	s.version                 = "0.3.7"
 	s.summary                 = "A client library for the Pnut.io social network written in Swift"
 
 	s.homepage                = "https://pnut.io"
