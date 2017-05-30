@@ -19,7 +19,8 @@ extension Token : Serializable {
             let appLink = URL(string: link),
             let appName = app["name"] as? String,
             let scopes = dict["scopes"] as? [String],
-            let user = User(from: dict["user"] as? [String : Any] ?? [:])
+        let u = dict["user"] as? [String : Any],
+            let user = User(from: u)
             else { return nil }
 
         self.appId = appId
