@@ -9,7 +9,7 @@ IBSC_MODULE = PnutKit
 PRODUCT_MODULE_NAME = PnutKit
 EXECUTABLE_NAME = PnutKit
 
-INFOPLIST_FILE = PnutKit/Info.plist
+INFOPLIST_FILE = Sources/PnutKit/Info.plist
 
 SWIFT_VERSION = 3.1
 

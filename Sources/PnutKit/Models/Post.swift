@@ -1,7 +1,11 @@
 import Foundation
 
 
-private let dateFormatter = ISO8601DateFormatter()
+#if os(iOS) || os(macOS)
+    private let dateFormatter = ISO8601DateFormatter()
+#else
+    private let dateFormatter = DateFormatter()
+#endif
 
 public struct Post {
     public var createdAt : Date
@@ -112,5 +116,5 @@ extension Post : Serializable {
         
         return dict
     }
-
+    
 }
