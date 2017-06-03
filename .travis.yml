@@ -1,5 +1,5 @@
 osx_image: xcode8.3
 language: swift
 script:
-  - xctool -project PnutKit.xcodeproj -scheme PnutKit -sdk iphonesimulator clean build test
+  - xcodebuild -project PnutKit.xcodeproj -scheme PnutKit -configuration Release -sdk iphonesimulator10.3 clean build
 
