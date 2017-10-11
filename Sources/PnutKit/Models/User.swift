@@ -5,7 +5,6 @@ private let dateFormatter = ISO8601DateFormatter()
 
 public struct User {
     public var createdAt : Date
-    public var guid : String
     public var id : String
     public var locale : String
     public var timezone : String
@@ -46,7 +45,6 @@ public enum UserType : String {
 
 extension User : Serializable {
     static let deleted = User(createdAt: Date(),
-                              guid: "",
                               id: "",
                               locale: "",
                               timezone: "",
@@ -70,7 +68,6 @@ extension User {
     public init?(from dict : JSONDictionary) {
         guard let c = dict["created_at"] as? String,
             let createdAt = dateFormatter.date(from: c),
-            let guid = dict["guid"] as? String,
             let id = dict["id"] as? String,
             let locale = dict["locale"] as? String,
             let timezone = dict["timezone"] as? String,
@@ -83,7 +80,6 @@ extension User {
             else { return nil }
 
         self.createdAt = createdAt
-        self.guid = guid
         self.id = id
         self.locale = locale
         self.timezone = timezone
@@ -119,7 +115,6 @@ extension User {
     public func toDictionary() -> JSONDictionary {
         var dict : JSONDictionary = [
             "created_at" : dateFormatter.string(from: createdAt),
-            "guid" : guid,
             "id" : id,
             "locale" : locale,
             "timezone" : timezone,
