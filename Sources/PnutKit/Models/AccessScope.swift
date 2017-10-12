@@ -18,4 +18,6 @@ public enum AccessScope : String {
     case messages = "messages"
     /// only public channels and messages
     case publicMessages = "public_messages"
+    /// edit and access user's files
+    case files = "files"
 }
